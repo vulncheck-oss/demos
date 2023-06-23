@@ -1,4 +1,4 @@
-# demos
+# VulnCheck API Demos and Example Code
 
 This repository contains a collection of demos for the [VulnCheck](https://www.vulncheck.com/) platform. 
 
