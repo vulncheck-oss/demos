@@ -30,3 +30,7 @@ rank ordered by CVSS, EPSS, and pulls in additional data from the vulncheck v3 e
 <p align="center">
   <img src="assets/vc-api-explorer.png" alt="Screenshot of VC API Explorer top25 vulns demo">
 </p>
+
+<p align="center">
+    <img src="assets/vc-top25-vulns-ss.png" alt="Screenshot of top 25 data">
+</p>
