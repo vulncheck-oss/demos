@@ -28,9 +28,5 @@ Processes the vulncheck vulnerabilities-samples feed, displaying the top 25 vuln
 rank ordered by CVSS, EPSS, and pulls in additional data from the vulncheck v3 exploits index.
 
 <p align="center">
-  <img src="assets/vc-api-explorer.png" alt="Screenshot of VC API Explorer top25 vulns demo">
-</p>
-
-<p align="center">
     <img src="assets/vc-top25-vulns-ss.png" alt="Screenshot of top 25 data">
 </p>
