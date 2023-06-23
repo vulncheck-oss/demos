@@ -20,6 +20,8 @@ Many of these demos are using sample data so they load faster, which is dated.
     streamlit run top25-vulns.py
 ```
 
+---
+
 #### top25-vulns.py
 
 Processes the vulncheck vulnerabilities-samples feed, displaying the top 25 vulnerabilities
