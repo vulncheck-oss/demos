@@ -11,8 +11,6 @@ This is a demo of the VulnCheck API, using the [Streamlit](https://streamlit.io)
 import streamlit as st
 import html
 import requests
-import re
-import matplotlib.pyplot as plt
 import pandas as pd
 import requests
 import json
