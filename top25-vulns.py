@@ -148,8 +148,6 @@ def get_vulnerabilities_samples(url):
 
                 progress = idx / num_files
                 progress_bar.progress(progress)
-
-
         
         df = pd.DataFrame(data)
         df = df[['id'] + [col for col in df.columns if col != 'id']]
@@ -211,9 +209,13 @@ if api_key not in ["", None]:
                     results_df = globals()[function_name](row['url'])  
                     if results_df is not None:
                         for result_idx, result_row in results_df.iterrows():
-                            st.markdown(f"**ID**: {result_row['id']}")
-                            st.markdown(f"**CWE Name**: {result_row['problemtype_name']}")
-                            st.markdown(f"**CWE Value**: {result_row['problemtype_value']}")
+                            st.markdown(f"# {result_row['id']}")
+                            # setup two columns
+                            col1, col2 = st.columns(2)
+                            #st.markdown(f"**CWE Name**: {result_row['problemtype_name']}")
+                            #st.markdown(f"**CWE Value**: {result_row['problemtype_value']}")
+                            col1.markdown(f"**CWE Name**: {result_row['problemtype_name']}")
+                            col2.markdown(f"**CWE Value**: {result_row['problemtype_value']}")
                             description = result_row['description']['description_data'][0]['value']
                             st.markdown(f"**Description**: {html.escape(description)}", unsafe_allow_html=True)
                             st.markdown(f"**CNA**: {result_row['cve_data_meta']['ASSIGNER']}")
@@ -223,6 +225,10 @@ if api_key not in ["", None]:
                                 first_exploit_published = exploit_details['timeline'].get('first_exploit_published', 'N/A')
                                 first_exploit_published_weaponized_or_higher = exploit_details['timeline'].get('first_exploit_published_weaponized_or_higher', 'N/A')
                                 most_recent_exploit_published = exploit_details['timeline'].get('most_recent_exploit_published', 'N/A')
+                                # clean these dates up, 2020-08-09T05:48:10Z is too long
+                                first_exploit_published = first_exploit_published.split('T')[0]
+                                first_exploit_published_weaponized_or_higher = first_exploit_published_weaponized_or_higher.split('T')[0]
+                                most_recent_exploit_published = most_recent_exploit_published.split('T')[0]
 
                                 # Convert boolean values to emojis
                                 public_exploit_found_emoji = '✅' if exploit_details['public_exploit_found'] else '❌'
