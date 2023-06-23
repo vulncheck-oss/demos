@@ -210,12 +210,12 @@ if api_key not in ["", None]:
                     if results_df is not None:
                         for result_idx, result_row in results_df.iterrows():
                             st.markdown(f"# {result_row['id']}")
+
                             # setup two columns
                             col1, col2 = st.columns(2)
-                            #st.markdown(f"**CWE Name**: {result_row['problemtype_name']}")
-                            #st.markdown(f"**CWE Value**: {result_row['problemtype_value']}")
                             col1.markdown(f"**CWE Name**: {result_row['problemtype_name']}")
                             col2.markdown(f"**CWE Value**: {result_row['problemtype_value']}")
+
                             description = result_row['description']['description_data'][0]['value']
                             st.markdown(f"**Description**: {html.escape(description)}", unsafe_allow_html=True)
                             st.markdown(f"**CNA**: {result_row['cve_data_meta']['ASSIGNER']}")
