@@ -269,3 +269,4 @@ if api_key not in ["", None]:
                             st.markdown("---")
     else:
         st.write("Invalid API key")
+        st.write("Get your API key from https://vulncheck.com/token")
