@@ -196,52 +196,6 @@ def get_backup_list(api_key):
     else:
         return None
 
-def colored_progress(value: float):
-    color = None
-    if value == 0:
-        color = '#808080'  # Grey
-    elif 0 < value <= 3.9:
-        color = '#008000'  # Green
-    elif 4 <= value <= 6.9:
-        color = '#FFFF00'  # Yellow
-    elif 7 <= value <= 8.9:
-        color = '#FFA500'  # Orange
-    elif 9 <= value <= 10:
-        color = '#FF0000'  # Red
-    
-    # Set a maximum bar length
-    bar_len = 20
-
-    # Calculate number of block to fill
-    filled_len = int(round(bar_len * value / 10))
-
-    # Create the bar
-    bar = '█' * filled_len + '-' * (bar_len - filled_len)
-
-    return f"<span style='font-family: Courier New; color: {color}'>{value} |{bar}|</span>"
-
-def colored_epss_progress(value: float):
-    color = None
-    if 0 <= value < 0.25:
-        color = '#008000'  # Green
-    elif 0.25 <= value < 0.5:
-        color = '#FFFF00'  # Yellow
-    elif 0.5 <= value < 0.75:
-        color = '#FFA500'  # Orange
-    else:
-        color = '#FF0000'  # Red
-    
-    # Set a maximum bar length
-    bar_len = 20
-
-    # Calculate number of block to fill
-    filled_len = int(round(bar_len * value))
-
-    # Create the bar
-    bar = '█' * filled_len + '-' * (bar_len - filled_len)
-
-    return f"<span style='font-family: Courier New; color: {color}'>{value:.4f} |{bar}|</span>"
-
 if api_key not in ["", None]:
     df = get_backup_list(api_key)
 
@@ -298,14 +252,11 @@ if api_key not in ["", None]:
                             baseScoreV3 = result_row.get('temporalMetricV3', {}).get('cvssV3', {}).get('temporalScore', 0)
                             epss_score = result_row.get('epss', {}).get('epss_score', 0)
 
-                            st.markdown("### Base Score V2")
-                            st.markdown(colored_progress(baseScoreV2), unsafe_allow_html=True)
-
-                            st.markdown("### Base Score V3")
-                            st.markdown(colored_progress(baseScoreV3), unsafe_allow_html=True)
-
-                            st.markdown("### EPSS Score")
-                            st.markdown(colored_epss_progress(epss_score), unsafe_allow_html=True)
+                            col1, col2, col3 = st.columns(3)
+                            
+                            col1.metric("CVSSv2", baseScoreV2, 10)
+                            col2.metric("CVSSv3", baseScoreV3, 10)
+                            col3.metric("EPSS", epss_score, 1)
 
                             attack_pattern_count = len(result_row.get('related_attack_patterns', []))  # Get the length of the list as the count
                             st.markdown(f"**Related Attack Patterns Count**: {attack_pattern_count}")
