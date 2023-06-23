@@ -248,7 +248,7 @@ if api_key not in ["", None]:
                                 })
 
                                 # Display the DataFrame
-                                st.markdown("## Exploit Details")
+                                st.markdown("## Exploitation Details")
                                 st.table(exploit_df)
 
                             st.markdown("## Metrics")
